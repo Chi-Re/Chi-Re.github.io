@@ -55,4 +55,4 @@ function ExportTxt(name, data) {
     save_link.dispatchEvent(ev);
 }
 
-
+//SSL certificate problem: unable to get local issuer certificate
