@@ -148,7 +148,7 @@
 
 	h1, h2, h3, h4, h5, h6 {
 		/* color: #646464; */
-		color: #000;
+		/* color: #000; */
 		font-weight: 300;
 		line-height: 1em;
 		margin: 0 0 0.5em 0;
@@ -3309,7 +3309,7 @@
 		/* background: rgba(129, 108, 108, 0.363); */
 		/* color: #f9e6df; */
 		color: rgb(0, 0, 0);
-		padding: 7em 0 4em 0;
+		padding: 4em 0 4em 0;
 		text-align: center;
 	}
 

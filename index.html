@@ -25,8 +25,17 @@
             width: 100px;
             height: 30px;
         }
+
         #main_left {
-            width: 80%;
+            width: 90%;
+            display: inline-block;
+            background-color: #F5F5F5;
+            border: 2px solid rgba(255, 0, 0, 0);
+            border-radius: 30px;
+            margin-bottom: 20px;
+	    }
+        #main_left2 {
+            width: 90%;
             display: inline-block;
             background-color: #F5F5F5;
             border: 2px solid rgba(255, 0, 0, 0);
@@ -52,10 +61,36 @@
             /* background: linear-gradient(blue, pink); */
         }
         /* q, h1 ,h2,h3,h4,h5,h6,img, */
+        .two{
+            text-align: center;
+        }
+        .two .two-icons{
+            border-radius: 50%;
+            height: 120px;
+            width: 120px;
+        }
 
+        main {
+    display: block;
+}
+        .pgMq_kI78ZZeZbPShEtk {
+            margin: 60px auto;
+            max-width: 85%;
+        }
         .ItsUiI6rU9whJqmIKpXb {
-            display: flex;
+            display: flex;/*grid*/
             justify-content: space-between;
+        }
+        .ItsUiI6rU9whJqmIKpXb-F {
+            display: grid;/*flex*/
+            justify-content: space-between;
+        }
+        .ItsUiI6rU9whJqmIKpXb .VE2SR2k4HTm64An6tgwU {
+            width: 70%;
+        }
+        .ItsUiI6rU9whJqmIKpXb .QFDnXJppNy7VS3_dZitZ {
+            position: 50% 50%;
+            width: 30%;
         }
     </style>
 </head>
@@ -64,32 +99,43 @@
     <div id="app" data-v-app="">
         <div id="app">
             <body class="landing">
-                <div id="page-wrapper">
+                <main class="pgMq_kI78ZZeZbPShEtk">
                     <div id="page-wrapper">
                         <section id="cta">
-                            <img src="icon.png" style="width:100px; height:100px; border-radius:100%; overflow:hidden;">
-                            <br>
-                            <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 40px;">炽热S</h2>
+                            <!-- <img src="icon.png" style="width:100px; height:100px; border-radius:100%; overflow:hidden;">
+                            <br> -->
+                            <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 60px;">炽热S的博客网站</h2>
                             <q style="background-image: linear-gradient(to right, rgb(66, 25, 25), red);-webkit-background-clip: text;color: transparent;font-size: 20px;"
                             id="typing" class="欢迎来到我的博客<br>这里有我的java模组教程,人物简介和一些工具"></q>
                             <script src="js/typing.js"></script>
                         </section>
                     </div>
-                    <section id="main" class="container">
-                        <header>
-                            <div id="main_left">
-                                <h2><img class="icons" src="img/png/alphaaaa.png">日志</h2>
-                                <h5>2023.1.10  ▏懒得写更新  ▏HTML</h5>
-                                <p align="left" style="font-size: 20px;">
-                                    我的网站好了!  ohhhhhhhhhhhhhhhhhh, 嗯,大概花了3天时间(不要在考试中途写啊)<br>
-                                    emmm,或许我应该在日志上写更新的吧,好了,最新的更新就在这里显示
-                                </p><br>
+
+                    <div class="ItsUiI6rU9whJqmIKpXb" id="div123">
+                        <script src="js/页面适应.js"></script>
+                        <section id="main" class="VE2SR2k4HTm64An6tgwU">
+                            <header>
+                                <div id="main_left">
+                                    <h2><img class="icons" src="img/png/alphaaaa.png">日志</h2>
+                                    <h5>2023.1.10  ▏懒得写更新  ▏HTML</h5>
+                                    <p align="left" style="font-size: 20px;">
+                                        我的网站好了!  ohhhhhhhhhhhhhhhhhh, 嗯,大概花了3天时间(不要在考试中途写啊)<br>
+                                        emmm,或许我应该在日志上写更新的吧,好了,最新的更新就在这里显示
+                                    </p><br>
+                                </div>
+                                <div id="main_left">
+                                    <h2><img class="icons" src="img/png/alphaaaa.png">日志2</h2>
+                                </div>
+                            </header>
+                        </section>
+                        <aside id="main" class="QFDnXJppNy7VS3_dZitZ">
+                            <div id="main_left2" class="two">
+                                <img class="two-icons" src="icon.png">
+                                <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 40px;">炽热S</h2>
                             </div>
-                            <div id="main_left">
-                                <h2><img class="icons" src="img/png/alphaaaa.png">日志2</h2>
-                            </div>
-                        </header>
-                    </section>
+                        </section>
+                    </div>
+
                 </div>
             </body>
         </div>
