@@ -8,9 +8,14 @@
     <style>
         body {
             background-image: url("img/novelai-1668609561820.png");
-            background-repeat: no-repeat;
+            /* background-repeat: no-repeat;
             background-position: top;
             background-size: 100%;
+            background-attachment:fixed; */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 50% 50%;
         }
         input{
             width: 250px;
@@ -20,11 +25,42 @@
             width: 100px;
             height: 30px;
         }
+        #main_left {
+            width: 80%;
+            display: inline-block;
+            background-color: #F5F5F5;
+            border: 2px solid rgba(255, 0, 0, 0);
+            border-radius: 30px;
+            margin-bottom: 20px;
+	    }
+        
+        @font-face {
+            font-family: 得意黑;
+            src: url(font/得意黑.ttf);
+        }
+        .得意黑{
+            font-family: 得意黑;
+        }
+        .icons{
+            width:40px;
+            height:40px; 
+            border-radius:10%; 
+            overflow:hidden;
+            display: inline-block;
+            /* background-color: #000000; */
+            /* background-color:#000000; */
+            /* background: linear-gradient(blue, pink); */
+        }
+        /* q, h1 ,h2,h3,h4,h5,h6,img, */
 
+        .ItsUiI6rU9whJqmIKpXb {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <link rel="stylesheet" href="css\main.css">
-<body>
+<body  class="得意黑">
     <div id="app" data-v-app="">
         <div id="app">
             <body class="landing">
@@ -41,7 +77,17 @@
                     </div>
                     <section id="main" class="container">
                         <header>
-                            <h2>日志</h2>
+                            <div id="main_left">
+                                <h2><img class="icons" src="img/png/alphaaaa.png">日志</h2>
+                                <h5>2023.1.10  ▏懒得写更新  ▏HTML</h5>
+                                <p align="left" style="font-size: 20px;">
+                                    我的网站好了!  ohhhhhhhhhhhhhhhhhh, 嗯,大概花了3天时间(不要在考试中途写啊)<br>
+                                    emmm,或许我应该在日志上写更新的吧,好了,最新的更新就在这里显示
+                                </p><br>
+                            </div>
+                            <div id="main_left">
+                                <h2><img class="icons" src="img/png/alphaaaa.png">日志2</h2>
+                            </div>
                         </header>
                     </section>
                 </div>
