@@ -42,6 +42,14 @@
             border-radius: 30px;
             margin-bottom: 20px;
 	    }
+        #main_loge {
+            width: 40%;
+            display: inline-block;
+            background-color: #f5f5f58f;
+            border: 2px solid rgba(255, 0, 0, 0);
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
         
         @font-face {
             font-family: 得意黑;
@@ -69,10 +77,14 @@
             height: 120px;
             width: 120px;
         }
+        .p_styp1{
+            text-align: start;
+            font-size: 20px;
+        }
 
         main {
-    display: block;
-}
+            display: block;
+        }
         .pgMq_kI78ZZeZbPShEtk {
             margin: 60px auto;
             max-width: 85%;
@@ -92,6 +104,17 @@
             position: 50% 50%;
             width: 30%;
         }
+        /*测试文字*/
+        .lnryexet0cQnT2deBzz9 {
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            line-height: 2;
+            margin: 20px 0 30px;
+            overflow: hidden;
+            text-indent: 2em;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <link rel="stylesheet" href="css\main.css">
@@ -104,9 +127,12 @@
                         <section id="cta">
                             <!-- <img src="icon.png" style="width:100px; height:100px; border-radius:100%; overflow:hidden;">
                             <br> -->
-                            <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 60px;">炽热S的博客网站</h2>
-                            <q style="background-image: linear-gradient(to right, rgb(66, 25, 25), red);-webkit-background-clip: text;color: transparent;font-size: 20px;"
-                            id="typing" class="欢迎来到我的博客<br>这里有我的java模组教程,人物简介和一些工具"></q>
+                            <!--linear-gradient(to right, rgb(66, 25, 25), red)-->
+                            <div id="main_loge">
+                                <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 60px;">炽热S的博客网站</h2>
+                                <q style="background-image: linear-gradient(to right, rgb(66, 25, 25), red);-webkit-background-clip: text;color: transparent;font-size: 20px;"
+                                id="typing" class="欢迎来到我的博客<br>这里有我的java模组教程,人物简介和一些工具"></q>
+                            </div>
                             <script src="js/typing.js"></script>
                         </section>
                     </div>
@@ -117,11 +143,21 @@
                             <header>
                                 <div id="main_left">
                                     <h2><img class="icons" src="img/png/alphaaaa.png">日志</h2>
-                                    <h5>2023.1.10  ▏懒得写更新  ▏HTML</h5>
-                                    <p align="left" style="font-size: 20px;">
-                                        我的网站好了!  ohhhhhhhhhhhhhhhhhh, 嗯,大概花了3天时间(不要在考试中途写啊)<br>
-                                        emmm,或许我应该在日志上写更新的吧,好了,最新的更新就在这里显示
-                                    </p><br>
+                                    <h5>2023.1.10  ▏懒得写更新  ▏HTML  ▏TMD手机适配</h5>
+                                    <div>
+                                        <p align="left" style="text-indent: 2em;">
+                                            我的网站好了!  ohhhhhhhhhhhhhhhhhh, 嗯,大概花了3天时间(不要在考试中途写啊)<br>
+                                            emmm,或许我应该在日志上写更新的吧,好了,最新的更新就在这里显示
+                                        </p><br>
+                                        <p style="text-align: start;">
+                                            ▲<img src="img/png/icons/pixil-frame-0.png">第一次更新(2023.1.12)▲<br>
+                                            1.终于吧页面优化好了,不再是干巴巴的白色页面了<br>
+                                            2.手机页面适配,因为我是VS手搓网页,无法页面自动适配<br>
+                                            所以我用js做出来伪适配,c,以后再也不做UI了,手机页面<br>
+                                            适配真难受<br>
+                                            3.略
+                                        </p>
+                                    </div>
                                 </div>
                                 <div id="main_left">
                                     <h2><img class="icons" src="img/png/alphaaaa.png">日志2</h2>
@@ -132,6 +168,8 @@
                             <div id="main_left2" class="two">
                                 <img class="two-icons" src="icon.png">
                                 <h2 style="background-image: linear-gradient(to right, orange, red);-webkit-background-clip: text;color: transparent;font-size: 40px;">炽热S</h2>
+                                <p id="bi">简介</p>
+                                <script src="js/随机简介.js"></script>
                             </div>
                         </section>
                     </div>
