@@ -19,9 +19,9 @@ quotes[6] = '不要温和地走进那个良夜,怒斥吧，怒斥光明的消逝
 quotes[7] = '编程对我的学分没有帮助!'
 quotes[8] = '你都没有创建类,哪来的对象?'
 quotes[9] = '▼上传失败▼'
-quotes[10] = '你自己的选择,不是别人'
-quotes[11] = '思考?思考,思考!'
-quotes[13] = '来猜猜,随机简介是:真还是伪随机?'
+quotes[10] = 'python是很好的脚本语言'
+quotes[11] = 'alpha!'
+quotes[12] = '来猜猜,随机简介是:真还是伪随机?'
 var quote = quotes[rand1]	//由随机数选择一句话
 document.getElementById('bi').innerHTML=quote;
 
