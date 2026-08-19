@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>我们在一起</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+overflow:hidden;width:100vw;height:100vh;
+background:linear-gradient(135deg,#ff9a56,#ff6b6b,#c44d8f,#6b4e8a,#2d1b4e);
+background-size:600% 600%;
+animation:gradientBG 25s ease infinite;
+font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+-webkit-user-select:none;user-select:none;-webkit-touch-callout:none
+}
+@keyframes gradientBG{
+0%{background-position:0% 50%}
+25%{background-position:50% 0%}
+50%{background-position:100% 50%}
+75%{background-position:50% 100%}
+100%{background-position:0% 50%}
+}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#hearts{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.heart{
+position:absolute;bottom:-50px;animation:floatUp linear infinite;
+text-shadow:0 0 10px rgba(255,100,100,0.5)
+}
+@keyframes floatUp{
+0%{transform:translateY(0) translateX(-20px) scale(0);opacity:0}
+10%{opacity:0.7}
+50%{transform:translateY(-50vh) translateX(20px) scale(1.1);opacity:0.7}
+90%{opacity:0.3}
+100%{transform:translateY(-100vh) translateX(-15px) scale(0.5);opacity:0}
+}
+.container{
+position:relative;z-index:2;width:100%;height:100%;
+display:flex;justify-content:center;align-items:center;
+padding:20px
+}
+.content{
+display:flex;flex-direction:column;align-items:center;
+max-width:520px;width:100%
+}
+.title{
+color:#fff;font-size:2.8rem;font-weight:700;
+text-shadow:0 2px 20px rgba(0,0,0,0.3);
+letter-spacing:4px;margin-bottom:8px
+}
+.time-display{
+color:#fff;font-size:1.6rem;font-weight:600;
+text-shadow:0 2px 15px rgba(0,0,0,0.3);
+text-align:center;margin-bottom:24px;
+font-variant-numeric:tabular-nums;
+line-height:1.6;
+min-height:3.2rem
+}
+.time-unit{display:inline-block;margin:0 2px}
+.card-wrap{perspective:800px;width:100%}
+.card{
+position:relative;width:100%;border-radius:24px;
+padding:16px;
+background:rgba(255,255,255,0.10);
+backdrop-filter:blur(20px) saturate(180%);
+-webkit-backdrop-filter:blur(20px) saturate(180%);
+border:1px solid rgba(255,255,255,0.20);
+box-shadow:
+0 8px 40px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.15);
+transform-style:preserve-3d;
+transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s ease
+}
+.card.tilt-active{transition:transform 0.08s cubic-bezier(0.25,0.46,0.45,0.94)}
+.card-image{
+position:relative;width:100%;border-radius:16px;overflow:hidden;
+aspect-ratio:auto;background:rgba(0,0,0,0.1)
+}
+.card-image img{
+width:100%;height:auto;display:block;
+transition:opacity 0.6s ease;
+border-radius:16px
+}
+.card-glare{
+position:absolute;inset:0;border-radius:24px;
+pointer-events:none;
+background:radial-gradient(circle at 50% 50%, transparent 50%, rgba(0,0,0,0.05) 100%);
+opacity:0;transition:opacity 0.3s
+}
+.card:hover .card-glare,
+.card.tilt-active .card-glare{opacity:0.6}
+.subtitle{
+color:rgba(255,255,255,0.7);font-size:0.9rem;
+text-shadow:0 1px 8px rgba(0,0,0,0.3);
+margin-top:6px;letter-spacing:2px
+}
+@media(max-width:480px){
+.title{font-size:2rem;letter-spacing:2px}
+.time-display{font-size:1.1rem;margin-bottom:16px}
+.card{padding:12px;border-radius:18px}
+.card-image{border-radius:12px}
+.card-image img{border-radius:12px}
+.subtitle{font-size:0.75rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div id="hearts"></div>
+
+<div class="container">
+<div class="content">
+<div class="title">我们在一起</div>
+<div class="time-display" id="timeDisplay"></div>
+<div class="card-wrap">
+<div class="card" id="card">
+<div class="card-image">
+<img id="carouselImg" src="" alt="我们的回忆">
+</div>
+<div class="card-glare"></div>
+</div>
+</div>
+<div class="subtitle">💕 从 2026.07.01 开始 💕</div>
+</div>
+</div>
+
+<script>
+// ===== Image List =====
+const images=[
+"img/11A399D7446A76AD3152499EFF4B2641.jpeg",
+"img/457959B117D347460399DFA975B64F28.jpeg",
+"img/4A00BAA3BB22E00638C7337D59F9A99E.jpeg",
+"img/52937C4BAD740CB84388A3D45D0A1D45.jpeg",
+"img/6BEA614BA5A5BD5C3B69ACCCD5B5D6B9.jpeg",
+"img/924F188158DD3E37BDC38CAD06E51B91.jpeg",
+"img/9B992ECCBC856E140CC46D2D0E63FA15.jpeg",
+"img/A20842576AFF882EFA8E9621A2CDCF28.jpeg",
+"img/CFEEE45E08EFC595B9E43F6FFAFFFA54.png",
+"img/E10D69171A072E9E32F113706D7717B0.jpeg",
+"img/F0043AC31094897BD6042F2EED7602E4.jpeg",
+"img/FD1B688E32FAAC976760234F1C6144DF.gif"
+];
+const START_DATE=new Date("2026-07-01T00:00:00");
+
+// ===== Starfield Canvas =====
+const canvas=document.getElementById('starfield');
+const ctx=canvas.getContext('2d');
+let stars=[];
+
+function resizeCanvas(){
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+
+class Star{
+constructor(){
+this.reset();
+}
+reset(){
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+this.size=Math.random()*2.5+0.5;
+this.opacity=Math.random()*0.6+0.2;
+this.speed=Math.random()*0.02+0.005;
+this.dir=Math.random()>0.5?1:-1;
+this.driftX=(Math.random()-0.5)*0.15;
+this.driftY=(Math.random()-0.5)*0.15;
+}
+update(){
+this.opacity+=this.speed*this.dir;
+if(this.opacity>0.9||this.opacity<0.05)this.dir*=-1;
+this.x+=this.driftX;
+this.y+=this.driftY;
+if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height)this.reset();
+}
+draw(){
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+ctx.fillStyle=`rgba(255,255,255,${this.opacity})`;
+ctx.fill();
+}
+}
+
+function initStars(){
+stars=[];
+const count=Math.min(100,Math.floor(canvas.width*canvas.height/10000));
+for(let i=0;i<count;i++)stars.push(new Star());
+}
+initStars();
+
+function animateStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+stars.forEach(s=>{s.update();s.draw()});
+requestAnimationFrame(animateStars);
+}
+animateStars();
+
+// ===== Floating Hearts =====
+const heartContainer=document.getElementById('hearts');
+const heartEmojis=['❤️','💕','💗','💖','💝'];
+
+function createHearts(){
+heartContainer.innerHTML='';
+for(let i=0;i<18;i++){
+const el=document.createElement('div');
+el.className='heart';
+el.textContent=heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+el.style.left=Math.random()*95+'%';
+el.style.fontSize=(Math.random()*18+16)+'px';
+el.style.animationDuration=(Math.random()*8+7)+'s';
+el.style.animationDelay=(Math.random()*12)+'s';
+heartContainer.appendChild(el);
+}
+}
+createHearts();
+
+// ===== Time Calculation =====
+function calcElapsed(){
+const now=new Date();
+let y=now.getFullYear()-START_DATE.getFullYear();
+let m=now.getMonth()-START_DATE.getMonth();
+let d=now.getDate()-START_DATE.getDate();
+let h=now.getHours()-START_DATE.getHours();
+let min=now.getMinutes()-START_DATE.getMinutes();
+let s=now.getSeconds()-START_DATE.getSeconds();
+
+if(s<0){s+=60;min--}
+if(min<0){min+=60;h--}
+if(h<0){h+=24;d--}
+if(d<0){
+const prev=new Date(now.getFullYear(),now.getMonth(),0);
+d+=prev.getDate();m--
+}
+if(m<0){m+=12;y--}
+
+return{y,m,d,h,min,s};
+}
+
+function formatTime(t){
+const units=[
+{val:t.y,label:'年'},{val:t.m,label:'个月'},
+{val:t.d,label:'天'},{val:t.h,label:'时'},
+{val:t.min,label:'分'},{val:t.s,label:'秒'}
+];
+let started=false;
+let parts=[];
+for(const u of units){
+if(u.val>0||started){
+parts.push(u.val+u.label);
+started=true;
+}
+}
+if(parts.length===0)parts.push('0秒');
+return parts.join(' ');
+}
+
+function updateTime(){
+const el=document.getElementById('timeDisplay');
+el.textContent=formatTime(calcElapsed());
+}
+updateTime();
+setInterval(updateTime,1000);
+
+// ===== Random Image =====
+const imgEl=document.getElementById('carouselImg');
+const idx=Math.floor(Math.random()*images.length);
+imgEl.src=images[idx];
+imgEl.style.opacity='1';
+
+// ===== Desktop: Mouse Tilt =====
+const card=document.getElementById('card');
+const MAX_TILT=8;
+
+function handleMouseMove(e){
+const rect=card.getBoundingClientRect();
+const cx=rect.left+rect.width/2;
+const cy=rect.top+rect.height/2;
+const dx=(e.clientX-cx)/(rect.width/2);
+const dy=(e.clientY-cy)/(rect.height/2);
+const rx=dy*-MAX_TILT;
+const ry=dx*MAX_TILT;
+card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+updateGlare(e.clientX-rect.left,e.clientY-rect.top,rect.width,rect.height);
+}
+
+function handleMouseLeave(){
+card.style.transform='rotateX(0deg) rotateY(0deg)';
+card.classList.remove('tilt-active');
+document.removeEventListener('mousemove',handleMouseMove);
+}
+
+function updateGlare(x,y,w,h){
+const glare=card.querySelector('.card-glare');
+const px=(x/w)*100;
+const py=(y/h)*100;
+glare.style.background=`radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.25) 0%, transparent 60%)`;
+}
+
+card.addEventListener('mouseenter',()=>{
+document.addEventListener('mousemove',handleMouseMove);
+});
+card.addEventListener('mouseleave',handleMouseLeave);
+
+// Tilt reset on scroll away
+document.addEventListener('scroll',()=>{
+card.style.transform='rotateX(0deg) rotateY(0deg)';
+});
+
+// ===== Mobile: Touch Long-Press Tilt =====
+let touchTimer=null;
+let isLongPress=false;
+let touchStartPos=null;
+
+card.addEventListener('touchstart',(e)=>{
+const touch=e.touches[0];
+touchStartPos={x:touch.clientX,y:touch.clientY};
+isLongPress=false;
+card.classList.add('tilt-active');
+touchTimer=setTimeout(()=>{
+isLongPress=true;
+const rect=card.getBoundingClientRect();
+const cx=rect.left+rect.width/2;
+const cy=rect.top+rect.height/2;
+const dx=(touchStartPos.x-cx)/(rect.width/2);
+const dy=(touchStartPos.y-cy)/(rect.height/2);
+const rx=dy*-MAX_TILT;
+const ry=dx*MAX_TILT;
+card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+updateGlare(touchStartPos.x-rect.left,touchStartPos.y-rect.top,rect.width,rect.height);
+},200);
+},{passive:true});
+card.addEventListener('contextmenu',e=>e.preventDefault());
+
+card.addEventListener('touchmove',(e)=>{
+if(!touchStartPos)return;
+const touch=e.touches[0];
+const dist=Math.hypot(touch.clientX-touchStartPos.x,touch.clientY-touchStartPos.y);
+if(!isLongPress&&dist>10){
+clearTimeout(touchTimer);
+touchTimer=null;
+card.style.transform='rotateX(0deg) rotateY(0deg)';
+return;
+}
+if(isLongPress){
+e.preventDefault();
+const rect=card.getBoundingClientRect();
+const cx=rect.left+rect.width/2;
+const cy=rect.top+rect.height/2;
+const dx=(touch.clientX-cx)/(rect.width/2);
+const dy=(touch.clientY-cy)/(rect.height/2);
+const rx=dy*-MAX_TILT;
+const ry=dx*MAX_TILT;
+card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+updateGlare(touch.clientX-rect.left,touch.clientY-rect.top,rect.width,rect.height);
+}
+},{passive:false});
+
+card.addEventListener('touchend',()=>{
+clearTimeout(touchTimer);
+touchTimer=null;
+isLongPress=false;
+touchStartPos=null;
+card.style.transform='rotateX(0deg) rotateY(0deg)';
+card.classList.remove('tilt-active');
+setTimeout(()=>{
+card.style.transition='transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)';
+},50);
+});
+
+// ===== Resize Handler =====
+window.addEventListener('resize',()=>{
+resizeCanvas();
+initStars();
+});
+</script>
+</body>
+</html>
